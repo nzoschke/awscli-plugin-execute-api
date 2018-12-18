@@ -1,6 +1,6 @@
 # awscli-plugin-execute-api
 
-Plugin to configure a single AWS CLI operation to invoke an API Gateway method
+Plugin to configure a single AWS CLI operation to invoke an API Gateway / Lambda method
 
 ## Quick Start
 
@@ -24,7 +24,7 @@ $ aws configure set plugins.execute-api awscli_plugin_execute_api
 
 ### Configure an operation endpoint
 
-First configure a profile for the IAM user with `execute-api` policy:
+First configure a profile for the IAM with `execute-api:Invoke` permission:
 
 ```shell
 $ export AWS_PROFILE=myprofile
@@ -63,7 +63,7 @@ Now run a command:
 
 ```shell
 $ aws dynamodb update-table --table-name $TABLE_NAME --sse-specification Enabled=false
-An error occurred (ValidationException) when calling the UpdateTable operation: Modifying SSESpecification is not allowed
+An error occurred (ValidationException) when calling the UpdateTable operation: Custom error from Lambda handler
 ```
 
 <details>

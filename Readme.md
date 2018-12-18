@@ -2,45 +2,6 @@
 
 Plugin to configure a single AWS CLI operation to invoke an API Gateway method
 
-## Motivation
-
-For security reasons we'd like to give an IAM user access to a **limited subset** of an AWS API call functionality. For example on the `dynamodb update-table` operation we'd like to allow a user to modify:
-
-* Global indexes
-
-But disallow them to modify:
-
-* Provisioned throughput
-* Streams
-* Server side encryption
-
-A "serverless" solution includes:
-
-* IAM User
-    * Policy that disallows `dynamodb:UpdateTable`
-    * Policy that allows `execute-api:Invoke` on an API Gateway resource
-    * Access keys
-
-* API Gateway Method
-    * URL to POST an `update-table` request
-    * AWS_IAM authorization
-
-* Lambda Function
-    * Policy that allows `dynamodb:UpdateTable`
-    * Code that validates and performs `update-table` request
-
-* AWS CLI
-    * Custom endpoint URL for `dynamodb update-table` command
-    * Request signature for API Gateway
-
-This plugin registers a URL for a single CLI operation and automatically uses it.
-
-```shell
-$ aws configure set dynamodb.update-table https://m303r7o808.execute-api.us-east-1.amazonaws.com/Prod/update-table
-$ aws dynamodb update-table --table-name $TABLE_NAME --sse-specification Enabled=false
-An error occurred (ValidationException) when calling the UpdateTable operation: Modifying SSESpecification is not allowed
-```
-
 ## Quick Start
 
 ### Install with pip
@@ -117,6 +78,45 @@ $ aws dynamodb describe-table --debug --table-name $TABLE_NAME
 Plugin awscli_plugin_execute_api: Config [myprofile] dynamodb.describe-table not found
 ```
 </details>
+
+## Motivation
+
+For security reasons we'd like to give an IAM user access to a **limited subset** of an AWS API call functionality. For example on the `dynamodb update-table` operation we'd like to allow a user to modify:
+
+* Global indexes
+
+But disallow them to modify:
+
+* Provisioned throughput
+* Streams
+* Server side encryption
+
+A "serverless" solution includes:
+
+* IAM User
+    * Policy that disallows `dynamodb:UpdateTable`
+    * Policy that allows `execute-api:Invoke` on an API Gateway resource
+    * Access keys
+
+* API Gateway Method
+    * URL to POST an `update-table` request
+    * AWS_IAM authorization
+
+* Lambda Function
+    * Policy that allows `dynamodb:UpdateTable`
+    * Code that validates and performs `update-table` request
+
+* AWS CLI
+    * Custom endpoint URL for `dynamodb update-table` command
+    * Request signature for API Gateway
+
+This plugin registers a URL for a single CLI operation and automatically uses it.
+
+```shell
+$ aws configure set dynamodb.update-table https://m303r7o808.execute-api.us-east-1.amazonaws.com/Prod/update-table
+$ aws dynamodb update-table --table-name $TABLE_NAME --sse-specification Enabled=false
+An error occurred (ValidationException) when calling the UpdateTable operation: Modifying SSESpecification is not allowed
+```
 
 ## Troubleshooting
 

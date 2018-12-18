@@ -30,8 +30,8 @@ First configure a profile for the IAM with `execute-api:Invoke` permission:
 $ export AWS_PROFILE=myprofile
 
 $ aws configure
-AWS Access Key ID [None]: AKIAIE5DIKNGIBVR75BQ
-AWS Secret Access Key [None]: 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
+AWS Access Key ID [None]: AKIA...
+AWS Secret Access Key [None]: pWim...
 Default region name [None]: us-east-1
 Default output format [None]: json
 ```

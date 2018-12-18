@@ -1,0 +1,4 @@
+.vscode/
+awscli_plugin_execute_api.egg-info/
+build/
+dist/

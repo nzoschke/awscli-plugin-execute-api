@@ -5,7 +5,7 @@ with open("Readme.md", "r") as fh:
 
 setuptools.setup(
     name="awscli_plugin_execute_api",
-    version="0.0.1",
+    version="0.2.0",
     author="Noah Zoschke",
     author_email="noah@mixable.net",
     description="Plugin to configure a single AWS CLI operation to invoke an API Gateway method",
